@@ -1,9 +1,12 @@
 import './App.css';
+import Card from './reusable-components/Card';
 
 function App() {
   return (
     <div className="App">
-      React Job Listings
+      <Card>
+        CARD
+      </Card>
     </div>
   );
 }
