@@ -1,5 +1,6 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext } from 'react';
 import './App.css';
+import usePopulatedJobs from './custom-hooks/usePopulatedJobs';
 import Card from './reusable-components/Card';
 import initialState from './state/initialState';
 import reducer from './state/reducer';
@@ -7,17 +8,7 @@ import reducer from './state/reducer';
 export const MainContext = createContext();
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {
-    fetch('data.json')
-      .then(res => res.json())
-      .then(res => {
-        dispatch({
-          type: 'populateJobs',
-          value: res
-        })
-      })
-  }, []);
+  const [state, dispatch] = usePopulatedJobs(reducer, initialState);
 
   return (
     <div className="App">
@@ -27,9 +18,6 @@ function App() {
             { job.position }
           </Card>
         )) }
-        <Card>
-          CARD
-        </Card>
       </MainContext.Provider>
     </div>
   );
